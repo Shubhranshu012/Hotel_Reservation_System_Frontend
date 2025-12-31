@@ -1,47 +1,32 @@
-/* Global feel */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
 
-/* HERO SECTION */
 .hero {
-  height: 90vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb') center/cover;
+  position: relative;
+  height: 120vh;
   color: white;
+  overflow: hidden;
 }
 
-/* NAVBAR */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 60px;
+.slideshow {
+  position: absolute;
+  height: 100vh;
+  inset: 0;
+  z-index: -1;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 2px;
+.slideshow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(50%);
+  transition: opacity 1s ease-in-out;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-}
-
-.nav-links li {
-  cursor: pointer;
-  font-weight: 500;
-}
-
-/* HERO CONTENT */
 .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  margin-top: 150px;
 }
 
 .hero-content h1 {
@@ -64,7 +49,6 @@
   border-radius: 4px;
 }
 
-/* FEATURES */
 .features {
   display: flex;
   justify-content: space-around;
@@ -81,12 +65,7 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.feature-card h3 {
-  margin-bottom: 10px;
-  color: #333;
-}
 
-/* ABOUT */
 .about {
   padding: 80px 100px;
   text-align: center;
@@ -97,10 +76,37 @@
   font-size: 32px;
 }
 
-/* FOOTER */
 .footer {
   background-color: #222;
   color: #ccc;
   text-align: center;
   padding: 20px;
 }
+.booking-form {
+  display: flex;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 30px;
+}
+
+.booking-form input,.booking-form select {
+  padding: 12px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  border-radius: 4px;
+  min-width: 160px;
+}
+
+.booking-form button {
+  padding: 12px 25px;
+  background-color: #c9a24d;
+  border: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+

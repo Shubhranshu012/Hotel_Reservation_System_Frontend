@@ -1,47 +1,23 @@
 <header class="hero">
-  <nav class="navbar">
-    <div class="logo">GrandStay</div>
-    <ul class="nav-links">
-      <li>Home</li>
-      <li>Rooms</li>
-      <li>Services</li>
-      <li>Bookings</li>
-      <li>Contact</li>
-    </ul>
-  </nav>
+  <div class="slideshow">
+    <img [src]="images[currentIndex]" alt="Hotel Image">
+  </div>
 
   <div class="hero-content">
     <h1>Experience Luxury & Comfort</h1>
     <p>Premium hotel management for unforgettable stays</p>
-    <button class="btn-primary">Book Now</button>
+
+    <form class="booking-form">
+      <input type="text" placeholder="City">
+      <input type="date">
+      <input type="date">
+      <select>
+        <option value="">Rooms</option>
+        <option>1 Room</option>
+        <option>2 Rooms</option>
+        <option>3 Rooms</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
   </div>
 </header>
-
-<section class="features">
-  <div class="feature-card">
-    <h3>Luxury Rooms</h3>
-    <p>Modern, spacious, and elegantly designed rooms.</p>
-  </div>
-
-  <div class="feature-card">
-    <h3>24/7 Services</h3>
-    <p>Room service, concierge, and customer support.</p>
-  </div>
-
-  <div class="feature-card">
-    <h3>Easy Booking</h3>
-    <p>Fast, secure, and user-friendly booking system.</p>
-  </div>
-</section>
-
-<section class="about">
-  <h2>Welcome to GrandStay</h2>
-  <p>
-    We provide world-class hospitality with a seamless hotel management
-    experience for guests and staff.
-  </p>
-</section>
-
-<footer class="footer">
-  <p>© 2025 GrandStay Hotel Management System</p>
-</footer>
