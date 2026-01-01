@@ -18,4 +18,9 @@ export class Auth {
   login(payload:{email: string,password: string}): Observable<any>{
     return this.http.post(`${this.URL2}`, payload);
   }
+  registerManager(payload:any,hotelId:string){
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+    return this.http.post(`${this.URL1}/manager/${hotelId}`, payload,{headers});
+  }
 }

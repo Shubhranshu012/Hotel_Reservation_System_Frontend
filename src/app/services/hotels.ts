@@ -8,7 +8,9 @@ export class HotelService {
   private URL1 = 'http://localhost:8008/hotel-service/search';
   private URL2 = 'http://localhost:8008/hotel-service/hotel'
   private URL3 = 'http://localhost:8008/hotel-service/hotel/all'
-  
+  private URL4 = 'http://localhost:8008/hotel-service/hotel'
+  private URL5 = 'http://localhost:8008/hotel-service/hotel'
+
   constructor(private http: HttpClient) {}
   searchHotel(payload : any){
     return this.http.post<any[]>(`${this.URL1}`, payload);
@@ -16,9 +18,19 @@ export class HotelService {
   searchRooms(payload : any,hotelId:string){
     return this.http.post<any[]>(`${this.URL2}/${hotelId}/rooms/available`, payload);
   }
+  addHotel(payload:any){
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+    return this.http.post(`${this.URL5}`, payload,{headers});
+  }
   getAllHotelAdmin(){
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
     return this.http.get<any[]>(`${this.URL3}`,{headers});
+  }
+  deleteHotel(hotelId:string){
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+    return this.http.delete(`${this.URL4}/${hotelId}`,{headers});
   }
 }
