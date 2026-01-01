@@ -21,10 +21,11 @@ export class Login {
     this.authService.login({ "email": this.email, "password": this.password })
       .subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.token);
+          localStorage.setItem('token', response.Token);
           localStorage.setItem('role', response.role);
           localStorage.setItem('email', this.email);
           localStorage.setItem('hotelId',response.hotelId);
+          console.log(response);
           this.router.navigate(["/"])
         },
         error: error => {

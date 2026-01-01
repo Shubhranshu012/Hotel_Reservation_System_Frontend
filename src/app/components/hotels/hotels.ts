@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotelService } from '../../services/hotels';
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +17,7 @@ export class Hotels {
   roomCount!: number;
   errorMessage:string="";
   hotels: any[] = [];
-  constructor(private route: ActivatedRoute, private hotelService:HotelService, private cdr: ChangeDetectorRef) {}
+  constructor(private route: ActivatedRoute, private hotelService:HotelService, private cdr: ChangeDetectorRef ,private router:Router) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -38,5 +38,14 @@ export class Hotels {
         }
       });
     });
+  }
+  rooms(hotelId:string){
+    console.log(hotelId);
+    this.router.navigate([`rooms/${hotelId}`], {
+    queryParams: {
+      checkIn: this.checkIn,   
+      checkOut: this.checkOut
+    }
+  })
   }
 }

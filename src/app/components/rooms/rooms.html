@@ -1,0 +1,32 @@
+<div class="rooms-container">
+  <h1 class="rooms-title">Available Rooms</h1>
+  <p class="rooms-subtitle">
+    Hotel: {{ hotelId }} | From {{ checkIn }} to {{ checkOut }}
+  </p>
+
+  <div class="rooms-grid">
+    <ng-container *ngIf="rooms.length > 0; else noRooms">
+      <div class="room-card" *ngFor="let room of rooms">
+        <div class="room-row">
+          <div class="room-image">
+            <img src="Room.jpg" alt="{{ room.type }}">
+          </div>
+          <div class="room-info">
+            <h2>Room {{ room.roomNumber }} - {{ room.type }}</h2>
+            <p>Status: {{ room.status }}</p>
+            <p>Price: {{ room.price ? '$' + room.price : 'Not Available' }}</p>
+            <button class="book-btn" 
+                    [disabled]="room.status !== 'AVAILABLE'"  
+                    (click)="bookRoom(room.id)">
+              Book
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noRooms>
+      <p class="no-rooms">No rooms available for the selected dates.</p>
+    </ng-template>
+  </div>
+</div>
