@@ -7,15 +7,15 @@
     <h1>Experience Luxury & Comfort</h1>
     <p>Premium hotel management for unforgettable stays</p>
 
-    <form class="booking-form">
-      <input type="text" placeholder="City">
-      <input type="date">
-      <input type="date">
-      <select>
+    <form class="booking-form" (ngSubmit)="search()">
+      <input type="text" placeholder="City" name="city" [(ngModel)]="city">
+      <input type="date" name="checkIn" [(ngModel)]="checkIn">
+      <input type="date"  name="checkOut" [(ngModel)]="checkOut">
+      <select name="rooms" [(ngModel)]="rooms">
         <option value="">Rooms</option>
-        <option>1 Room</option>
-        <option>2 Rooms</option>
-        <option>3 Rooms</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
       </select>
       <button type="submit">Search</button>
     </form>

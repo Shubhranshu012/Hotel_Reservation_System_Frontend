@@ -13,7 +13,7 @@ import { Password } from '../../services/password';
 export class Signin {
   email:string="";
   password:string="";
-  role:string="USER";
+  role:string="GUEST";
   message:string="";
   constructor(private router:Router,private authService:Auth,private cdr: ChangeDetectorRef,private passwordService: Password){
   

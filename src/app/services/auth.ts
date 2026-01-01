@@ -7,14 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class Auth {
   
-  private URL = 'http://localhost:8001/AUTHSERVICE/auth';
+  private URL1 = 'http://localhost:8008/auth-service/auth/register';
+  private URL2 = 'http://localhost:8008/auth-service/auth/login'
 
   constructor(private http: HttpClient) {}
   register(payload: {email: string,password: string,role: string}): Observable<any> {
-    return this.http.post(`${this.URL}/register`, payload);
+    return this.http.post(`${this.URL1}`, payload);
   }
 
   login(payload:{email: string,password: string}): Observable<any>{
-    return this.http.post(`${this.URL}/login`, payload);
+    return this.http.post(`${this.URL2}`, payload);
   }
 }

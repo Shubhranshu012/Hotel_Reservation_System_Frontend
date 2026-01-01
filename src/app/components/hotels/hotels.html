@@ -1,0 +1,31 @@
+<div class="hotels-container">
+    <div class="center">
+        <h1 class="hotels-title">Available Hotels in {{ city }}</h1>
+        <p class="hotels-subtitle">
+            From {{ checkIn}} to {{ checkOut}} - {{ roomCount }} Room(s)
+        </p>
+    </div>
+
+
+    <div class="hotels-grid">
+        <ng-container *ngIf="hotels.length > 0; else noHotels">
+            <div class="hotel-card" *ngFor="let hotel of hotels">
+                <div class="hotel-row">
+                    <div class="hotel-image">
+                        <img src="img1.jpg" alt="{{ hotel.hotelName }}">
+                    </div>
+                    <div class="hotel-info">
+                        <h2>{{ hotel.hotelName }}</h2>
+                        <p>{{ hotel.address }}, {{ hotel.city }}</p>
+                        <p>Rooms: {{ hotel.numberOfRooms }} | Status: {{ hotel.status }}</p>
+                        <button class="book-btn" [disabled]="hotel.status !== 'ACTIVE'">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-template #noHotels>
+            <p class="no-hotels">No hotels found for the selected dates and city.</p>
+        </ng-template>
+    </div>
+</div>
