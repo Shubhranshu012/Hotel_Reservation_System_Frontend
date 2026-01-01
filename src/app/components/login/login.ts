@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-signin',
+  selector: 'app-login',
   imports: [FormsModule],
-  templateUrl: './signin.html',
-  styleUrl: './signin.css',
+  templateUrl: './login.html',
+  styleUrl: './login.css',
 })
-export class Signin {
+export class Login {
   email:string="";
   password:string="";
 }
