@@ -1,0 +1,111 @@
+<div class="dashboard-container">
+    <h1 class="dashboard-title">Receptionist Dashboard</h1>
+    <div class="card">
+        <h2 class="card-title">Search Available Rooms</h2>
+        <div class="filter-row">
+            <div class="filter-field">
+                <label>Check-In Date</label>
+                <input type="date" [(ngModel)]="checkInDate">
+            </div>
+            <div class="filter-field">
+                <label>Check-Out Date</label>
+                <input type="date" [(ngModel)]="checkOutDate">
+            </div>
+
+            <button class="submit-btn" (click)="submitSearch()">Submit</button>
+        </div>
+    </div>
+    <div class="card" *ngIf="bookingRooms.length > 0">
+        <h2 class="card-title">Rooms Available</h2>
+        <table class="rooms-table">
+            <thead>
+                <tr>
+                    <th>Room No</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let room of bookingRooms">
+                    <td>{{room.roomNumber}}</td>
+                    <td>{{room.type}}</td>
+                    <td>
+                        <span class="status" [class.available]="room.status === 'AVAILABLE'"> {{room.status}}</span>
+                    </td>
+                    <td>₹ {{room.price ||'—'}}</td> 
+                    <td class="actions">
+                        <button class="book-btn" (click)="openBookModal(room)">Book Room</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-backdrop" *ngIf="showModal">
+        <div class="modal">
+            <h3>Book Room {{selectedRoom?.roomNumber}}</h3>
+            <label>Email</label>
+            <input type="email" [(ngModel)]="customerEmail" placeholder="Enter customer email">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="customerName" placeholder="Enter customer Name">
+            <div class="Error-booking"><p>{{boookingError}}</p></div>
+            <div class="modal-buttons">
+                <button class="book-btn" (click)="confirmBooking()">Book</button>
+                <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">All Rooms</h2>
+        <table class="rooms-table">
+            <thead>
+                <tr>
+                    <th>Room No</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let room of rooms">
+                    <td>{{room.roomNumber}}</td>
+                    <td>{{room.type}}</td>
+                    <td>
+                        <span class="status" [class.available]="room.status === 'AVAILABLE'">{{ room.status }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card" *ngIf="bookedRooms.length > 0">
+  <h2 class="card-title">Booked Rooms</h2>
+  <table class="rooms-table">
+    <thead>
+      <tr>
+        <th>Room No</th>
+        <th>Guest Name</th>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of bookedRooms">
+        <td>{{ getRoomNumber(booking.roomId) }}</td>
+        <td>{{ booking.guestName }}</td>
+        <td>{{ booking.checkInDate }}</td>
+        <td>{{ booking.checkOutDate }}</td>
+        <td>
+          <span class="status" [class.available]="booking.status === 'BOOKED'">{{booking.status}}</span>
+        </td>
+        <td class="actions">
+          <button class="checkin-btn" (click)="checkIn(booking.roomId)">Check In</button>
+          <button class="checkout-btn" (click)="checkOut(booking.roomId)">Check Out</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
