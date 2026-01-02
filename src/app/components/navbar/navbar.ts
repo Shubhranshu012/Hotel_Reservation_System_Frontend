@@ -15,4 +15,28 @@ export class Navbar {
     localStorage.clear();
     this.router.navigate(['home']);
   }
+  isLoggedIn(){
+    if(localStorage.getItem('token')!=null){
+      return true;
+    }
+    return false;
+  }
+  isManager(){
+    if(localStorage.getItem('role')=='MANAGER'){
+      return true;
+    }
+    return false;
+  }
+  isAdmin(){
+    if(localStorage.getItem('role')=='ADMIN'){
+      return true;
+    }
+    return false;
+  }
+  isReceptionist(){
+    if(localStorage.getItem('role')=='RECEPTIONIST'){
+      return true;
+    }
+    return false;
+  }
 }

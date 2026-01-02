@@ -82,9 +82,27 @@ export class ReceptionDashboard {
     document.body.style.overflow = 'auto';
   }
   checkIn(roomId:string){
+    const payload ={checkIn:true};
+    this.hotelService.checkInCheckOut(payload,roomId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.loadRooms();
+        this.cdr.detectChanges();
+      },
+      error: error => console.log(error)
+    });
     console.log(roomId);
   }
   checkOut(roomId:string){
+    const payload ={checkIn:false};
+    this.hotelService.checkInCheckOut(payload,roomId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.loadRooms();
+        this.cdr.detectChanges();
+      },
+      error: error => console.log(error)
+    });
     console.log(roomId);
   }
   confirmBooking() {

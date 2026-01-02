@@ -100,3 +100,31 @@
     <button class="submit-btn" (click)="registerReceptionist()">Register</button>
   </div>
 </div>
+<div class="card" *ngIf="bookedRooms.length > 0">
+  <h2 class="card-title">Booked Rooms</h2>
+  <table class="rooms-table">
+    <thead>
+      <tr>
+        <th>Room No</th>
+        <th>Guest Name</th>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th>Status</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of bookedRooms">
+        <td>{{ getRoomNumber(booking.roomId) }}</td>
+        <td>{{ booking.guestName }}</td>
+        <td>{{ booking.checkInDate }}</td>
+        <td>{{ booking.checkOutDate }}</td>
+        
+        <td>
+          <span class="status" [class.available]="booking.status === 'BOOKED'">{{booking.status}}</span>
+        </td>
+        <td>{{ booking.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

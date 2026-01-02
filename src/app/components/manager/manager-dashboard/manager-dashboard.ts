@@ -25,9 +25,13 @@ export class ManagerDashboard {
   receptionistEmail = '';
   receptionistPassword = '';
   receptionistError = '';
-
+  bookedRooms: any[] = [];
   openReceptionistModal() {
     this.showReceptionistModal = true;
+  }
+  getRoomNumber(roomId: string): string {
+    const room = this.rooms.find(r => r.id === roomId);
+    return room ? room.roomNumber : '—';
   }
 
   closeReceptionistModal() {
@@ -54,6 +58,8 @@ export class ManagerDashboard {
     this.bookingService.getAllBooking().subscribe({
       next: (response) => {
         console.log(response);
+        this.bookedRooms=response;
+        this.cdr.detectChanges();
       },
       error: error => console.log(error)
     });

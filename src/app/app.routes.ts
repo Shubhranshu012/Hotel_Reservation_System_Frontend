@@ -14,5 +14,5 @@ export const routes: Routes = [
     {path:"hotels",component:Hotels},{path:"rooms/:hotelId", component:Rooms},
     {path:"admin/dashboard",component:AdminDashboard},
     {path:"manager/dashboard",component:ManagerDashboard},
-    {path:"reception /dashboard",component:ReceptionDashboard}
+    {path:"reception/dashboard",component:ReceptionDashboard}
 ];
