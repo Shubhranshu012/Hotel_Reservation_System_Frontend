@@ -1,0 +1,77 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Manager Dashboard</h1>
+
+  <!-- Add Room Card -->
+  <div class="card">
+    <h2 class="card-title">Add New Room</h2>
+
+    <form class="dashboard-form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Room Number</label>
+          <input type="text" [(ngModel)]="roomNumber" name="roomNumber" placeholder="101">
+        </div>
+
+        <div class="form-field">
+          <label>Status</label>
+          <select [(ngModel)]="status" name="status">
+            <option value="" disabled>Select status</option>
+            <option>AVAILABLE</option>
+            <option>OCCUPIED</option>
+            <option>MAINTENANCE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Room Type</label>
+          <select [(ngModel)]="type" name="type">
+            <option value="" disabled>Select type</option>
+            <option>SINGLE</option>
+            <option>DOUBLE</option>
+            <option>DELUXE</option>
+            <option>SUITE</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>Price</label>
+          <input type="number" [(ngModel)]="price" name="price" placeholder="₹ per night">
+        </div>
+      </div>
+
+      <p *ngIf="roomError" class="error-text">{{ roomError }}</p>
+
+      <button type="submit" class="submit-btn">Add Room</button>
+    </form>
+  </div>
+
+  <!-- Rooms List -->
+  <div class="card">
+    <h2 class="card-title">Rooms</h2>
+
+    <table class="rooms-table">
+      <thead>
+        <tr>
+          <th>Room No</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of rooms">
+          <td>{{ room.roomNumber }}</td>
+          <td>{{ room.type }}</td>
+          <td>
+            <span class="status" [class.available]="room.status === 'AVAILABLE'">
+              {{ room.status }}
+            </span>
+          </td>
+          <td>₹ {{ room.price || '—' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

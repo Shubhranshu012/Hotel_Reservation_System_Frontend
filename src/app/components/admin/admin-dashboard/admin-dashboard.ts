@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HotelService } from '../../../services/hotels';
 import { CommonModule } from '@angular/common';
 import { Auth } from '../../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -26,9 +27,12 @@ export class AdminDashboard {
   managerEmail = '';
   managerPassword = '';
 
-  constructor(private hotelService: HotelService, private cdr: ChangeDetectorRef,private authService:Auth) { }
+  constructor(private router:Router,private hotelService: HotelService, private cdr: ChangeDetectorRef,private authService:Auth) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('role') != "ADMIN"){
+      this.router.navigate(["login"]);
+    }
     this.loadHotels();
   }
 

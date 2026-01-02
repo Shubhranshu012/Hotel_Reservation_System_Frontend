@@ -41,12 +41,10 @@
 
                 <div class="hotel-actions">
                     <button class="manager-btn" (click)="openAddManager(hotel.id)"> Add Manager </button>
-
                     <button class="delete-btn" (click)="openDeleteHotel(hotel.id)"> Delete </button>
                 </div>
             </div>
         </div>
-
         <ng-template #noHotels>
             <p class="no-hotels">No hotels available</p>
         </ng-template>
@@ -68,7 +66,6 @@
 <div class="modal" *ngIf="showDeleteModal">
   <h2>Are you sure?</h2>
   <p>This action cannot be undone.</p>
-
   <div class="modal-actions">
     <button class="danger" (click)="deleteHotel()">Delete</button>
     <button class="secondary" (click)="closeModals()">Cancel</button>

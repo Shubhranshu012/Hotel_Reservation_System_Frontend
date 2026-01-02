@@ -5,10 +5,12 @@ import { Login } from './components/login/login';
 import { Hotels } from './components/hotels/hotels';
 import { Rooms } from './components/rooms/rooms';
 import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboard';
+import { ManagerDashboard } from './components/manager/manager-dashboard/manager-dashboard';
 
 export const routes: Routes = [
     {path:"",component:Home},{path:"home",component:Home},
     {path:"signin",component:Signin},{path:"login",component:Login},
     {path:"hotels",component:Hotels},{path:"rooms/:hotelId", component:Rooms},
-    {path:"admin/dashboard",component:AdminDashboard}
+    {path:"admin/dashboard",component:AdminDashboard},
+    {path:"manager/dashboard",component:ManagerDashboard}
 ];

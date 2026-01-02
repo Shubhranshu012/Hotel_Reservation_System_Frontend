@@ -41,7 +41,6 @@ export class Rooms {
   }
   bookRoom(roomId: string) {
     console.log('Booked Room ID:', roomId);
-    // You can also send a booking request here later
   }
 
 }

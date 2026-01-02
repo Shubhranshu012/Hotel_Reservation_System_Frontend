@@ -23,4 +23,9 @@ export class Auth {
     const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
     return this.http.post(`${this.URL1}/manager/${hotelId}`, payload,{headers});
   }
+  registerReceptionist(payload:any,hotelId:string){
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+    return this.http.post(`${this.URL1}/receptionist/${hotelId}`, payload,{headers});
+  }
 }
