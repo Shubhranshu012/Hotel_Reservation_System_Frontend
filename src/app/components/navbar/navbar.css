@@ -28,3 +28,12 @@ a{
   text-decoration: none;
   color: black;
 }
+button{
+  text-decoration: none;
+  border: none;
+  outline: none;
+  background-color: inherit;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+}

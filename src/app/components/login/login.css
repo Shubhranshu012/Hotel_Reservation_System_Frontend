@@ -11,7 +11,8 @@
     background: rgba(235, 228, 228, 0.9);
     border-radius: 28px;
     padding: 40px;
-    width: 40%;
+    max-width: 400px;
+    width: 100%;
     margin: auto;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
 }
@@ -57,6 +58,9 @@
     transition: 0.3s;
     pointer-events: none;
 }
+input{
+    font-size: 18px;
+}
 
 .soft-field input:focus+label,
 .soft-field input:not(:placeholder-shown)+label {
@@ -80,6 +84,9 @@
     cursor: pointer;
     position: relative;
 }
+.button-text{
+    font-size: 18px;
+}
 
 .button-loader {
     display: none;
@@ -94,7 +101,7 @@
 .comfort-signup {
     padding-top: 15px;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     color: rgba(139, 102, 85, 0.7);
 }
 
@@ -102,4 +109,27 @@
     font-size: 13px;
     margin-top: 6px;
     display: none;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+}
+
+.Loader {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    z-index: 1001;
+}
+.Message{
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    height: 5vh;
+    font-size: 17px;
 }

@@ -16,7 +16,7 @@ export class ReceptionDashboard {
   checkOutDate = '';
   rooms: any[] = [];
   bookingRooms: any[] = [];
-
+  
   showModal = false;
   selectedRoom: any = null;
   customerEmail = '';
@@ -81,9 +81,9 @@ export class ReceptionDashboard {
     this.selectedRoom = null;
     document.body.style.overflow = 'auto';
   }
-  checkIn(roomId:string){
+  checkIn(roomId:string,bookingId:string){
     const payload ={checkIn:true};
-    this.hotelService.checkInCheckOut(payload,roomId).subscribe({
+    this.hotelService.checkInCheckOut(payload,roomId,bookingId).subscribe({
       next: (response) => {
         console.log(response);
         this.loadRooms();
@@ -93,9 +93,9 @@ export class ReceptionDashboard {
     });
     console.log(roomId);
   }
-  checkOut(roomId:string){
+  checkOut(roomId:string,bookingId:string){
     const payload ={checkIn:false};
-    this.hotelService.checkInCheckOut(payload,roomId).subscribe({
+    this.hotelService.checkInCheckOut(payload,roomId,bookingId).subscribe({
       next: (response) => {
         console.log(response);
         this.loadRooms();

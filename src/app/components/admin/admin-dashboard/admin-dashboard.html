@@ -57,6 +57,7 @@
   <h2>Add Manager</h2>
   <input type="email" placeholder="Manager Email" [(ngModel)]="managerEmail"/>
   <input type="password" placeholder="Password" [(ngModel)]="managerPassword" />
+  <input type="password" placeholder="Confirm Password" [(ngModel)]="managerConfirmPassword" />
   <div class="modal-actions">
     <button class="primary" (click)="addManager()">Add</button>
     <button class="secondary" (click)="closeModals()">Cancel</button>

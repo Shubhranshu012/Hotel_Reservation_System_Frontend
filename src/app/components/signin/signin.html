@@ -22,12 +22,14 @@
       </div>
       <div class="soft-field">
         <div class="field-container">
-          <input type="password" id="password2" required autocomplete="password" placeholder=" ">
+          <input name="confirmPassword" type="password" id="password2" required autocomplete="password" placeholder=" " [(ngModel)]="confirmPassword">
           <label for="email">Confirm Password</label>
         </div>
         <span class="gentle-error" id="passwordError"></span>
       </div>
-
+      <div class="Message">
+        <p *ngIf="message">{{message}}</p>
+      </div>
       <button type="submit" class="comfort-button">
         <span class="button-text">Sign in</span>
       </button>
@@ -38,4 +40,9 @@
       <a routerLink="/login" class="comfort-link">Login</a>
     </div>
   </div>
+</div>
+<div class="modal-backdrop" *ngIf="showBlur"></div>
+<div class="Loader" *ngIf="showBlur">
+  <app-loader *ngIf="!successMessage"></app-loader>
+  <p>{{successMessage}}</p>
 </div>

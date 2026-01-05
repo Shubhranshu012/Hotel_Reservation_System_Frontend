@@ -11,7 +11,6 @@
           <input type="email" id="email" name="email" autocomplete="email" placeholder=" " [(ngModel)]="email">
           <label for="email">Email address</label>
         </div>
-        <span class="gentle-error" id="emailError"></span>
       </div>
 
       <div class="soft-field">
@@ -19,7 +18,9 @@
           <input type="password" id="password" name="password" autocomplete="password" placeholder=" " [(ngModel)]="password">
           <label for="email">Password</label>
         </div>
-        <span class="gentle-error" id="passwordError"></span>
+      </div>
+      <div class="Message">
+        <p>{{errorMessage}}</p>
       </div>
       <button type="submit" class="comfort-button">
         <span class="button-text">Login</span>
@@ -32,3 +33,5 @@
     </div>
   </div>
 </div>
+<div class="modal-backdrop" *ngIf="showBlur"></div>
+<div class="Loader" *ngIf="showBlur"><app-loader></app-loader></div>

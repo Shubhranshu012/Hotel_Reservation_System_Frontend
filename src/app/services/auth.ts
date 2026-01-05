@@ -11,7 +11,7 @@ export class Auth {
   private URL2 = 'http://localhost:8008/auth-service/auth/login'
 
   constructor(private http: HttpClient) {}
-  register(payload: {email: string,password: string,role: string}): Observable<any> {
+  register(payload: {email: string,password: string,confirmPassword:string,role: string}): Observable<any> {
     return this.http.post(`${this.URL1}`, payload);
   }
 

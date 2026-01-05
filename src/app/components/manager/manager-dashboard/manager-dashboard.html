@@ -90,6 +90,10 @@
     <label>Password</label>
     <input type="password" [(ngModel)]="receptionistPassword" placeholder="********"/>
   </div>
+  <div class="modal-field">
+    <label>Confirm Password</label>
+    <input type="password" [(ngModel)]="receptionistConfirmPassword" placeholder="********"/>
+  </div>
 
   <p *ngIf="receptionistError" class="modal-error">
     {{ receptionistError }}

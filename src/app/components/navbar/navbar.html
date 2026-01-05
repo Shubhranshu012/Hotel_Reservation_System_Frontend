@@ -2,11 +2,11 @@
     <div class="logo">GrandStay</div>
     <ul class="nav-links">
         <li><a routerLink="">Home</a></li>
-        <li *ngIf="!isLoggedIn()"><a routerLink="/login">Login</a></li>
         <li *ngIf="!isLoggedIn()"><a routerLink="/signin">Register</a></li>
+        <li *ngIf="!isLoggedIn()"><a routerLink="/login">Login</a></li>
         <li *ngIf="isAdmin()"><a routerLink="/admin/dashboard">Dashboard</a></li>
         <li *ngIf="isManager()"><a routerLink="/manager/dashboard">Dashboard</a></li>
         <li *ngIf="isReceptionist()"><a routerLink="/reception/dashboard">Dashboard</a></li>
-        <li><a (click)="logout()">Logout</a></li>
+        <li *ngIf="isLoggedIn()"><button type="button" (click)="logout()">Logout</button></li>
     </ul>
 </nav>

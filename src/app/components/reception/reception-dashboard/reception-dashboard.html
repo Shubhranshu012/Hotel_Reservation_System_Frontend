@@ -102,8 +102,8 @@
           <span class="status" [class.available]="booking.status === 'BOOKED'">{{booking.status}}</span>
         </td>
         <td class="actions">
-          <button class="checkin-btn" (click)="checkIn(booking.roomId)">Check In</button>
-          <button class="checkout-btn" (click)="checkOut(booking.roomId)">Check Out</button>
+          <button class="checkin-btn" (click)="checkIn(booking.roomId,booking.id)">Check In</button>
+          <button class="checkout-btn" (click)="checkOut(booking.roomId,booking.id)">Check Out</button>
         </td>
       </tr>
     </tbody>

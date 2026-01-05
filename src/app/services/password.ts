@@ -9,7 +9,7 @@ export class Password {
       return 'Password is required';
     }
     if (password.length < 7) {
-      return 'Password must be at least 7 characters long';
+      return 'Password must have at least 7 characters';
     }
     let hasUppercase = false;
     let hasLowercase = false;
@@ -30,16 +30,16 @@ export class Password {
     }
 
     if (!hasUppercase) {
-      return 'Password must contain at least one uppercase letter';
+      return 'Password must have at least one uppercase letter';
     }
     if (!hasLowercase) {
-      return 'Password must contain at least one lowercase letter';
+      return 'Password must have at least one lowercase letter';
     }
     if (!hasNumber) {
-      return 'Password must contain at least one number';
+      return 'Password must have at least one number';
     }
     if (!hasSpecial) {
-      return 'Password must contain at least one special character';
+      return 'Password must have at least one special character';
     }
     return null;
   }

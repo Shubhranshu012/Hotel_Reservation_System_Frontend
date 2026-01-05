@@ -5,6 +5,7 @@ import { Auth } from '../../../services/auth';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../../services/booking';
+import { Password } from '../../../services/password';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -24,6 +25,7 @@ export class ManagerDashboard {
 
   receptionistEmail = '';
   receptionistPassword = '';
+  receptionistConfirmPassword = '';
   receptionistError = '';
   bookedRooms: any[] = [];
   openReceptionistModal() {
@@ -40,7 +42,7 @@ export class ManagerDashboard {
     this.receptionistPassword = '';
     this.receptionistError = '';
   }
-  constructor(private router: Router, private bookingService: BookingService, private hotelService: HotelService, private cdr: ChangeDetectorRef, private authService: Auth) { }
+  constructor(private passwordService: Password, private router: Router, private bookingService: BookingService, private hotelService: HotelService, private cdr: ChangeDetectorRef, private authService: Auth) { }
   allRooms() {
     this.bookingService.getAllRooms().subscribe({
       next: (response) => {
@@ -58,7 +60,7 @@ export class ManagerDashboard {
     this.bookingService.getAllBooking().subscribe({
       next: (response) => {
         console.log(response);
-        this.bookedRooms=response;
+        this.bookedRooms = response;
         this.cdr.detectChanges();
       },
       error: error => console.log(error)
@@ -104,17 +106,30 @@ export class ManagerDashboard {
       this.receptionistError = 'Email and Password are required';
       return;
     }
-    const payload = {email: this.receptionistEmail,password: this.receptionistPassword};
-    console.log('Register receptionist payload:', payload);
-    this.authService.registerReceptionist(payload).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: error => {
-        console.log(error);
-        this.cdr.detectChanges();
-      }
-    })
-    this.closeReceptionistModal();
+    if (this.receptionistConfirmPassword !== this.receptionistPassword) {
+      this.receptionistError = 'Confirm Password Not Same';
+      this.cdr.detectChanges();
+      return;
+    }
+    const validate = this.passwordService.validate(this.receptionistPassword);
+    if (validate == null) {
+      const payload = { email: this.receptionistEmail, password: this.receptionistPassword,confirmPassword:this.receptionistConfirmPassword };
+      console.log('Register receptionist payload:', payload);
+      this.authService.registerReceptionist(payload).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: error => {
+          console.log(error);
+          this.cdr.detectChanges();
+        }
+      })
+      this.closeReceptionistModal();
+    }
+    else {
+      this.receptionistError = validate;
+      this.cdr.detectChanges();
+      return;
+    }
   }
 }

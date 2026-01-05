@@ -5,7 +5,7 @@
   </p>
 
   <div class="rooms-grid">
-    <ng-container *ngIf="rooms.length > 0; else noRooms">
+    <ng-container *ngIf="rooms.length > 0; else noRooms" >
       <div class="room-card" *ngFor="let room of rooms">
         <div class="room-row">
           <div class="room-image">
@@ -15,10 +15,7 @@
             <h2>Room {{ room.roomNumber }} - {{ room.type }}</h2>
             <p>Status: {{ room.status }}</p>
             <p>Price: {{ room.price ? '$' + room.price : 'Not Available' }}</p>
-            <button class="book-btn" 
-                    [disabled]="room.status !== 'AVAILABLE'"  
-                    (click)="bookRoom(room.id)">
-              Book
+            <button class="book-btn" [disabled]="room.status !== 'AVAILABLE'" (click)="bookRoom(room.id)">Book
             </button>
           </div>
         </div>

@@ -1,1 +1,48 @@
-<p>user-dashboard works!</p>
+<div class="dashboard">
+  <h1>Your Bookings</h1>
+
+  <div class="booking-card" *ngFor="let booking of bookings">
+    <div class="booking-info">
+      <h3>Room ID: {{ booking.roomId }}</h3>
+      <p><strong>Guest:</strong> {{ booking.guestName }}</p>
+      <p><strong>Check-In:</strong> {{ booking.checkInDate }}</p>
+      <p><strong>Check-Out:</strong> {{ booking.checkOutDate }}</p>
+      <p><strong>Price:</strong>₹ {{ booking.price }}</p>
+      <p><strong>Status:</strong>{{ booking.status }}</p>
+    </div>
+
+    <div class="actions">
+      <button class="modify-btn" (click)="openModify(booking)">Modify</button>
+      <button *ngIf="booking.status === 'BOOKED'" class="cancel-btn" (click)="openCancel(booking)">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="backdrop" *ngIf="showModifyModal">
+  <div class="modal">
+    <h2>Modify Booking</h2>
+
+    <label>Check-In Date</label>
+    <input type="date" [(ngModel)]="newCheckIn">
+
+    <label>Check-Out Date</label>
+    <input type="date" [(ngModel)]="newCheckOut">
+
+    <div class="modal-actions">
+      <button class="modify-btn1" (click)="confirmModify()">Change</button>
+      <button class="cancel-btn1" (click)="closeModify()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="backdrop" *ngIf="showCancelModal">
+  <div class="modal">
+    <h2>Cancel Booking?</h2>
+    <p>Are you sure you want to cancel this booking?</p>
+
+    <div class="modal-actions">
+      <button class="cancel-btn1" (click)="confirmCancel()">Yes</button>
+      <button class="modify-btn1" (click)="closeCancel()">No</button>
+    </div>
+  </div>
+</div>

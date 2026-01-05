@@ -40,10 +40,10 @@ export class HotelService {
     const hotelId=localStorage.getItem('hotelId');
     return this.http.post(`${this.URL4}/${hotelId}/room`,payload,{headers});
   }
-  checkInCheckOut(payload:any,roomId:string){
+  checkInCheckOut(payload:any,roomId:string,bookingId:string){
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
     const hotelId=localStorage.getItem('hotelId');
-    return this.http.put(`${this.URL6}/${hotelId}/rooms/${roomId}`,payload,{headers});
+    return this.http.put(`${this.URL6}/${hotelId}/rooms/${roomId}/${bookingId}`,payload,{headers});
   }
 }
