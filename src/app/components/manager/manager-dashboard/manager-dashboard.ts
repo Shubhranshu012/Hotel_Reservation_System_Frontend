@@ -30,6 +30,9 @@ export class ManagerDashboard {
   receptionistConfirmPassword = '';
   receptionistError = '';
   bookedRooms: any[] = [];
+
+  monthlySummary: any[] = [];
+  yearlySummary: any[] = [];
   openReceptionistModal() {
     this.showReceptionistModal = true;
   }
@@ -64,11 +67,39 @@ export class ManagerDashboard {
       next: (response) => {
         console.log(response);
         this.bookedRooms = response;
+        this.generateBookingSummary();
         this.showBlur=false;
         this.cdr.detectChanges();
       },
       error: error => console.log(error)
     });
+  }
+  generateBookingSummary() {
+    const monthMap: any = {};
+    const yearMap: any = {};
+
+    this.bookedRooms.forEach(booking => {
+      const date = new Date(booking.checkInDate);
+      const monthKey = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+      const yearKey = date.getFullYear();
+
+      // Month-wise
+      if (!monthMap[monthKey]) {
+        monthMap[monthKey] = { month: monthKey, bookings: 0, revenue: 0 };
+      }
+      monthMap[monthKey].bookings += 1;
+      monthMap[monthKey].revenue += booking.price || 0;
+
+      // Year-wise
+      if (!yearMap[yearKey]) {
+        yearMap[yearKey] = { year: yearKey, bookings: 0, revenue: 0 };
+      }
+      yearMap[yearKey].bookings += 1;
+      yearMap[yearKey].revenue += booking.price || 0;
+    });
+
+    this.monthlySummary = Object.values(monthMap);
+    this.yearlySummary = Object.values(yearMap);
   }
   onSubmit() {
     this.roomError = '';

@@ -132,6 +132,46 @@
     </tbody>
   </table>
 </div>
+<div class="card" *ngIf="monthlySummary.length > 0">
+  <h2 class="card-title">Month-wise Booking Summary</h2>
+
+  <table class="rooms-table">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Total Bookings</th>
+        <th>Total Revenue (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of monthlySummary">
+        <td>{{ m.month }}</td>
+        <td>{{ m.bookings }}</td>
+        <td>₹ {{ m.revenue }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="card" *ngIf="yearlySummary.length > 0">
+  <h2 class="card-title">Year-wise Booking Summary</h2>
+
+  <table class="rooms-table">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Total Bookings</th>
+        <th>Total Revenue (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let y of yearlySummary">
+        <td>{{ y.year }}</td>
+        <td>{{ y.bookings }}</td>
+        <td>₹ {{ y.revenue }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <div class="Loader" *ngIf="showBlur">
   <app-loader></app-loader>
 </div>
