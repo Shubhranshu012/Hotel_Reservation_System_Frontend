@@ -22,7 +22,8 @@ export class UserDashboard {
   newCheckIn = '';
   newCheckOut = '';
   showBlur: boolean = true;
-
+  minDate: string = '';
+  errorMessage:string ="";
   constructor(private bookingService: BookingService,private cdr: ChangeDetectorRef) {}
   getAllBookings(){
     this.bookingService.getUserHotel().subscribe({
@@ -37,6 +38,8 @@ export class UserDashboard {
   }
   ngOnInit() {
     this.getAllBookings();
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
   }
 
   openModify(booking: any) {
@@ -54,12 +57,24 @@ export class UserDashboard {
   }
 
   confirmModify() {
+    if(this.newCheckIn  === '' || this.newCheckOut === '' ){
+      this.errorMessage="Check In and Chech Out Date is required";
+      this.cdr.detectChanges();
+      return;
+    }
+    this.showBlur=true;
     const payload={checkInDate: this.newCheckIn,checkOutDate: this.newCheckOut}
     this.bookingService.updateUserHotel(payload,this.selectedBooking.id).subscribe({
       next: (res) => {
-        this.getAllBookings();;
+        this.showBlur=false;
+        this.getAllBookings();
+        this.cdr.detectChanges();
       },
-      error: err => console.log(err)
+      error: (error) => {
+        this.showBlur=false;
+        this.errorMessage=error.error.changeRequest || error.error.error;
+        console.log(error);
+      }
     })
     this.closeModify();
   }

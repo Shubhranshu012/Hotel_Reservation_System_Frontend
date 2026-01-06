@@ -44,6 +44,8 @@
 .room-image img {
   width: 180px;
   height: 120px;
+  margin-left: 20px;
+  border-radius: 10px;
   object-fit: cover;
   border-right: 1px solid #eee;
 }
@@ -103,8 +105,95 @@
     left:50%;
     top:50%;
     transform: translate(-50%,-50%);
-    z-index: 1001;
+    z-index: 1009;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
+.rooms-filters {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  padding-left: 10px;
+}
+.rooms-filters label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  
+  color: #333;
+}
+
+.rooms-filters input[type="range"] {
+  margin-top: 0.3rem;
+}
+
+.rooms-filters select {
+  margin-top: 0.4rem;
+  padding: 0.5rem 0.1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+label{
+  padding-right: 10px;
+}
+.booking-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 1002;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.booking-modal h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.booking-modal p {
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-buttons .btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-buttons .btn.confirm {
+  background-color: #4f46e5;
+  color: white;
+}
+.modal-buttons .btn.cancel {
+  background-color: #e53e3e;
+  color: white;
+}
+

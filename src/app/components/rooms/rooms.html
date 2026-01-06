@@ -3,20 +3,32 @@
   <p class="rooms-subtitle">
     Hotel: {{ hotelId }} | From {{ checkIn }} to {{ checkOut }}
   </p>
+  <div class="rooms-filters">
+    <div class="row">
+      <label>Room Type:</label>
+      <select [(ngModel)]="selectedType" (ngModelChange)="filterRooms()">
+        <option value="">All</option>
+        <option *ngFor="let type of roomTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Max Price: ₹ {{ maxPrice }}</label>
+      <input type="range" min="0" [max]="highestPrice" [(ngModel)]="maxPrice" (input)="filterRooms()" />
+    </div>
+  </div>
 
   <div class="rooms-grid">
-    <ng-container *ngIf="rooms.length > 0; else noRooms" >
-      <div class="room-card" *ngFor="let room of rooms">
+    <ng-container *ngIf="rooms.length > 0; else noRooms">
+      <div class="room-card" *ngFor="let room of filteredRooms">
         <div class="room-row">
           <div class="room-image">
             <img src="Room.jpg" alt="{{ room.type }}">
           </div>
           <div class="room-info">
             <h2>Room {{ room.roomNumber }} - {{ room.type }}</h2>
-            <p>Status: {{ room.status }}</p>
-            <p>Price: {{ room.price ? '$' + room.price : 'Not Available' }}</p>
-            <button class="book-btn" [disabled]="room.status !== 'AVAILABLE'" (click)="bookRoom(room.id)">Book
-            </button>
+            <p>Price Per Day: {{ room.price ? '₹ ' + room.price : 'Not Available' }}</p>
+            <p>Total Price: ₹ {{ getTotalPrice(room) }} ({{ getTotalDays() }} days)</p>
+            <button class="book-btn" [disabled]="room.status !== 'AVAILABLE'" (click)="confirmBooking(room)">Book</button>
           </div>
         </div>
       </div>
@@ -30,4 +42,13 @@
 <div class="modal-backdrop" *ngIf="showBlur"></div>
 <div class="Loader" *ngIf="showBlur">
   <app-loader></app-loader>
+</div>
+<div class="modal-backdrop" *ngIf="showBookingModal || showBlur"></div>
+<div class="booking-modal" *ngIf="showBookingModal">
+  <h3>Confirm Booking</h3>
+  <p>Are you sure you want to book Room {{ roomToBook?.roomNumber }} - {{ roomToBook?.type }}?</p>
+  <div class="modal-buttons">
+    <button class="btn confirm" (click)="bookRoom()">Confirm</button>
+    <button class="btn cancel" (click)="cancelBooking()">Cancel</button>
+  </div>
 </div>

@@ -23,11 +23,13 @@
     <h2>Modify Booking</h2>
 
     <label>Check-In Date</label>
-    <input type="date" [(ngModel)]="newCheckIn">
+    <input type="date" [(ngModel)]="newCheckIn" [min]="minDate">
 
     <label>Check-Out Date</label>
-    <input type="date" [(ngModel)]="newCheckOut">
-
+    <input type="date" [(ngModel)]="newCheckOut" [min]="newCheckIn || minDate">
+    <div class="message">
+      <p>{{errorMessage}}</p>
+    </div>
     <div class="modal-actions">
       <button class="modify-btn1" (click)="confirmModify()">Change</button>
       <button class="cancel-btn1" (click)="closeModify()">Cancel</button>
