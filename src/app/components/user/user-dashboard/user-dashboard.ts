@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BookingService } from '../../../services/booking';
+import { Loader } from '../../loader/loader';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,Loader],
   templateUrl: './user-dashboard.html',
   styleUrls: ['./user-dashboard.css'],
 })
@@ -20,12 +21,14 @@ export class UserDashboard {
 
   newCheckIn = '';
   newCheckOut = '';
+  showBlur: boolean = true;
 
   constructor(private bookingService: BookingService,private cdr: ChangeDetectorRef) {}
   getAllBookings(){
     this.bookingService.getUserHotel().subscribe({
       next: (res) => {
         this.bookings = res;
+        this.showBlur=false;
         this.cdr.detectChanges();
 
       },

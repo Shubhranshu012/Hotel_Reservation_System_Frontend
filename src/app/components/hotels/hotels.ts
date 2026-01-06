@@ -2,11 +2,12 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotelService } from '../../services/hotels';
 import { CommonModule } from '@angular/common';
+import { Loader } from '../loader/loader';
 
 @Component({
   selector: 'app-hotels',
   standalone:true,
-  imports: [CommonModule],
+  imports: [CommonModule,Loader],
   templateUrl: './hotels.html',
   styleUrl: './hotels.css',
 })
@@ -17,9 +18,11 @@ export class Hotels {
   roomCount!: number;
   errorMessage:string="";
   hotels: any[] = [];
+  showBlur: boolean = true;
   constructor(private route: ActivatedRoute, private hotelService:HotelService, private cdr: ChangeDetectorRef ,private router:Router) {}
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe(params => {
       this.city = params['city'];
       this.checkIn = params['checkIn'];
@@ -30,6 +33,7 @@ export class Hotels {
         next: (response) => {
           console.log(response);
           this.hotels = response;
+          this.showBlur=false;
           this.cdr.detectChanges();
         },
         error: error => {

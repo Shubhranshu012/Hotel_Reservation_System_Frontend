@@ -8,6 +8,7 @@ import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboa
 import { ManagerDashboard } from './components/manager/manager-dashboard/manager-dashboard';
 import { ReceptionDashboard } from './components/reception/reception-dashboard/reception-dashboard';
 import { UserDashboard } from './components/user/user-dashboard/user-dashboard';
+import { Profile } from './components/profile/profile';
 
 export const routes: Routes = [
     {path:"",component:Home},{path:"home",component:Home},
@@ -16,5 +17,6 @@ export const routes: Routes = [
     {path:"admin/dashboard",component:AdminDashboard},
     {path:"manager/dashboard",component:ManagerDashboard},
     {path:"reception/dashboard",component:ReceptionDashboard},
-    {path:"user/dashboard",component:UserDashboard}
+    {path:"user/dashboard",component:UserDashboard},
+    {path:"profile",component:Profile}
 ];

@@ -1,0 +1,33 @@
+<div class="profile-page">
+  <div class="profile-card">
+    <h2>Profile</h2>
+    <p><strong>Email:</strong> {{email}}</p>
+    <p><strong>Role:</strong> {{role}}</p>
+    <button class="btn" (click)="openChangePassword()">Change Password</button>
+  </div>
+  <div class="modal-overlay" *ngIf="showModal">
+    <div class="modal">
+      <h3>Change Password</h3>
+      <form (ngSubmit)="changePassword()">
+        <label>Old Password</label>
+        <input type="password" [(ngModel)]="oldPassword" name="oldPassword" required>
+
+        <label>New Password</label>
+        <input type="password" [(ngModel)]="newPassword" name="newPassword" required>
+
+        <div class="message">
+            <p>{{errorMessage}}</p>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="btn">Update</button>
+          <button type="button" class="btn cancel" (click)="closeModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" *ngIf="showBlur"></div>
+<div class="Loader" *ngIf="showBlur">
+    <app-loader *ngIf="!successMessage"></app-loader>
+    <p class="success">{{successMessage}}</p>
+</div>

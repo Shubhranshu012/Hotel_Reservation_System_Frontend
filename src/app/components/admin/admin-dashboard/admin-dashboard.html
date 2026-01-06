@@ -41,7 +41,7 @@
 
                 <div class="hotel-actions">
                     <button class="manager-btn" (click)="openAddManager(hotel.id)"> Add Manager </button>
-                    <button class="delete-btn" (click)="openDeleteHotel(hotel.id)"> Delete </button>
+                    <button class="delete-btn" (click)="openDeleteHotel(hotel.id)" *ngIf="hotel.status!=='INACTIVE'"> Delete </button>
                 </div>
             </div>
         </div>
@@ -55,9 +55,12 @@
 
 <div class="modal" *ngIf="showManagerModal">
   <h2>Add Manager</h2>
-  <input type="email" placeholder="Manager Email" [(ngModel)]="managerEmail"/>
+  <input type="email" placeholder="Manager Email" autocomplete="email" [(ngModel)]="managerEmail"/>
   <input type="password" placeholder="Password" [(ngModel)]="managerPassword" />
   <input type="password" placeholder="Confirm Password" [(ngModel)]="managerConfirmPassword" />
+  <div class="Message">
+    <p>{{managerError}}</p>
+  </div>
   <div class="modal-actions">
     <button class="primary" (click)="addManager()">Add</button>
     <button class="secondary" (click)="closeModals()">Cancel</button>
@@ -71,4 +74,8 @@
     <button class="danger" (click)="deleteHotel()">Delete</button>
     <button class="secondary" (click)="closeModals()">Cancel</button>
   </div>
+</div>
+<div class="modal-backdrop" *ngIf="showBlur"></div>
+<div class="Loader" *ngIf="showBlur">
+  <app-loader></app-loader>
 </div>

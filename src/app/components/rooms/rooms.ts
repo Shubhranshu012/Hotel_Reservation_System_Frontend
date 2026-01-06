@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HotelService } from '../../services/hotels';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking';
+import { Loader } from '../loader/loader';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,Loader],
   templateUrl: './rooms.html',
   styleUrl: './rooms.css',
 })
@@ -16,6 +17,7 @@ export class Rooms {
   checkIn!: string;
   checkOut!: string;
   rooms: any[] = [];
+  showBlur: boolean = true;
   constructor(private route: ActivatedRoute,private bookingService:BookingService ,private hotelService: HotelService, private cdr: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class Rooms {
       next: (response) => {
         console.log(response);
         this.rooms = response;
+        this.showBlur=false;
         this.rooms = this.rooms.filter(
           room => room.status === 'AVAILABLE'
         );

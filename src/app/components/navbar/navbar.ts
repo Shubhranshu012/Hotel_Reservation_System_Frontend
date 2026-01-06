@@ -39,4 +39,13 @@ export class Navbar {
     }
     return false;
   }
+  isGuest(){
+    if(localStorage.getItem('role') == 'GUEST'){
+      return true;
+    }
+    else{
+      return false;
+    }
+
+  }
 }

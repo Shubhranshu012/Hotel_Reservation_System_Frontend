@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Auth } from '../../../services/auth';
 import { Router } from '@angular/router';
 import { Password } from '../../../services/password';
+import { Loader } from '../../loader/loader';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,Loader],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
 })
@@ -29,6 +30,7 @@ export class AdminDashboard {
   managerPassword = '';
   managerConfirmPassword = '';
   managerError = '';
+  showBlur: boolean = true;
 
   constructor(private passwordService: Password, private router: Router, private hotelService: HotelService, private cdr: ChangeDetectorRef, private authService: Auth) { }
 
@@ -41,11 +43,16 @@ export class AdminDashboard {
 
   loadHotels() {
     this.hotelService.getAllHotelAdmin().subscribe({
-      next: (res) => {
-        this.hotels = res;
+      next: (response) => {
+        this.hotels = response;
+        console.log(response);
         this.cdr.detectChanges();
+      },
+      error:(error)=>{
+        console.log(error);
       }
     });
+    this.showBlur=false;
   }
 
   openAddManager(hotelId: string) {
@@ -68,6 +75,11 @@ export class AdminDashboard {
 
   addManager() {
     if (!this.selectedHotelId) return;
+    if(this.managerEmail.trim().length<=0){
+      this.managerError="Email is Required";
+      this.cdr.detectChanges();
+      return;
+    }
     const validate = this.passwordService.validate(this.managerPassword);
     if (this.managerConfirmPassword !== this.managerPassword) {
       this.managerError = "Confirm Password Not Same";
@@ -75,16 +87,19 @@ export class AdminDashboard {
       return;
     }
     if (validate == null) {
+      this.showBlur=true;
       const payload = { hotelId: this.selectedHotelId, email: this.managerEmail, password: this.managerPassword, confirmPassword: this.managerConfirmPassword };
       this.authService.registerManager(payload, this.selectedHotelId).subscribe({
         next: () => {
-          console.log("Manager Added");
           this.loadHotels();
           this.closeModals();
         },
-        error: (err) => {
-          console.error(err);
-          this.closeModals();
+        error: (error) => {
+          console.error(error);
+          this.managerError = error.error.error;
+          this.showBlur=false;
+          this.cdr.detectChanges();
+
         }
       });
     }
@@ -97,7 +112,7 @@ export class AdminDashboard {
 
   deleteHotel() {
     if (!this.selectedHotelId) return;
-
+    this.showBlur=true;
     this.hotelService.deleteHotel(this.selectedHotelId).subscribe({
       next: () => {
         console.log('Deleted hotel:', this.selectedHotelId);
@@ -133,14 +148,19 @@ export class AdminDashboard {
       this.hotelError = 'Room Count must be greater than 0';
       return;
     }
+    this.showBlur=true;
     const payload = { hotelName: this.hotelName, city: this.city, address: this.address, numberOfRooms: this.roomCount };
     this.hotelService.addHotel(payload).subscribe({
       next: () => {
         console.log("Added Hotel");
         this.loadHotels();
       },
-      error: (err) => {
-        console.error(err);
+      error: (error) => {
+        console.error(error);
+        this.showBlur=false;
+        this.hotelError =error.error.error;
+        this.cdr.detectChanges();
+
       }
     })
   }

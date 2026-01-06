@@ -9,8 +9,8 @@
 
     <form class="booking-form" (ngSubmit)="search()">
       <input type="text" placeholder="City" name="city" [(ngModel)]="city">
-      <input type="date" name="checkIn" [(ngModel)]="checkIn">
-      <input type="date"  name="checkOut" [(ngModel)]="checkOut">
+      <input type="date" [min]="minDate" name="checkIn" [(ngModel)]="checkIn">
+      <input type="date" [min]="checkIn || minDate" name="checkOut" [(ngModel)]="checkOut">
       <select name="rooms" [(ngModel)]="rooms">
         <option value="">Rooms</option>
         <option>1</option>

@@ -5,14 +5,17 @@
         <div class="filter-row">
             <div class="filter-field">
                 <label>Check-In Date</label>
-                <input type="date" [(ngModel)]="checkInDate">
+                <input type="date" [min]="minDate" [(ngModel)]="checkInDate">
             </div>
             <div class="filter-field">
                 <label>Check-Out Date</label>
-                <input type="date" [(ngModel)]="checkOutDate">
+                <input type="date" [min]="checkInDate || minDate" [(ngModel)]="checkOutDate">
             </div>
 
             <button class="submit-btn" (click)="submitSearch()">Submit</button>
+        </div>
+        <div class="errorMessage">
+            <p>{{submitError}}</p>
         </div>
     </div>
     <div class="card" *ngIf="bookingRooms.length > 0">
@@ -24,6 +27,7 @@
                     <th>Type</th>
                     <th>Status</th>
                     <th>Price</th>
+                    <th>Total</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -34,7 +38,8 @@
                     <td>
                         <span class="status" [class.available]="room.status === 'AVAILABLE'"> {{room.status}}</span>
                     </td>
-                    <td>₹ {{room.price ||'—'}}</td> 
+                    <td>₹ {{room.price ||'—'}}</td>
+                    <td>₹ {{ getTotalPrice(room) }} ({{ getTotalDays() }} days)</td>
                     <td class="actions">
                         <button class="book-btn" (click)="openBookModal(room)">Book Room</button>
                     </td>
@@ -49,7 +54,9 @@
             <input type="email" [(ngModel)]="customerEmail" placeholder="Enter customer email">
             <label>Name</label>
             <input type="text" [(ngModel)]="customerName" placeholder="Enter customer Name">
-            <div class="Error-booking"><p>{{boookingError}}</p></div>
+            <div class="Error-booking">
+                <p>{{boookingError}}</p>
+            </div>
             <div class="modal-buttons">
                 <button class="book-btn" (click)="confirmBooking()">Book</button>
                 <button class="cancel-btn" (click)="closeModal()">Cancel</button>
@@ -80,32 +87,36 @@
     </div>
 </div>
 <div class="card" *ngIf="bookedRooms.length > 0">
-  <h2 class="card-title">Booked Rooms</h2>
-  <table class="rooms-table">
-    <thead>
-      <tr>
-        <th>Room No</th>
-        <th>Guest Name</th>
-        <th>Check-In</th>
-        <th>Check-Out</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let booking of bookedRooms">
-        <td>{{ getRoomNumber(booking.roomId) }}</td>
-        <td>{{ booking.guestName }}</td>
-        <td>{{ booking.checkInDate }}</td>
-        <td>{{ booking.checkOutDate }}</td>
-        <td>
-          <span class="status" [class.available]="booking.status === 'BOOKED'">{{booking.status}}</span>
-        </td>
-        <td class="actions">
-          <button class="checkin-btn" (click)="checkIn(booking.roomId,booking.id)">Check In</button>
-          <button class="checkout-btn" (click)="checkOut(booking.roomId,booking.id)">Check Out</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <h2 class="card-title">Booked Rooms</h2>
+    <table class="rooms-table">
+        <thead>
+            <tr>
+                <th>Room No</th>
+                <th>Guest Name</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of bookedRooms">
+                <td>{{ getRoomNumber(booking.roomId) }}</td>
+                <td>{{ booking.guestName }}</td>
+                <td>{{ booking.checkInDate }}</td>
+                <td>{{ booking.checkOutDate }}</td>
+                <td>
+                    <span class="status" [class.available]="booking.status === 'BOOKED'">{{booking.status}}</span>
+                </td>
+                <td class="actions">
+                    <button class="checkin-btn" (click)="checkIn(booking.roomId,booking.id)">Check In</button>
+                    <button class="checkout-btn" (click)="checkOut(booking.roomId,booking.id)">Check Out</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-backdrop" *ngIf="showBlur"></div>
+<div class="Loader" *ngIf="showBlur">
+    <app-loader></app-loader>
 </div>

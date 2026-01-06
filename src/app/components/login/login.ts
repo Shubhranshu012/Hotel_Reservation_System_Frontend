@@ -20,6 +20,16 @@ export class Login {
   }
 
   onSubmit() {
+    if(this.email.trim().length<=0){
+      this.errorMessage="Email Is Required";
+      this.cdr.detectChanges();
+      return;
+    }
+    if(this.password.trim().length<=0){
+      this.errorMessage="Password Is Required";
+      this.cdr.detectChanges();
+      return;
+    }
     this.showBlur=true;
     this.errorMessage = '';
     this.authService.login({ "email": this.email, "password": this.password })

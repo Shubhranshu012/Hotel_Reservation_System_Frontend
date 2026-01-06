@@ -14,11 +14,9 @@ export class Home implements OnInit {
   checkIn = '';
   checkOut = '';
   rooms = '';
+  minDate: string = '';
 
-  constructor(
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) { }
+  constructor(private router: Router,private cdr: ChangeDetectorRef) { }
   images = [
     'img1.jpg',
     'img2.jpg',
@@ -33,6 +31,8 @@ export class Home implements OnInit {
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
       this.cdr.detectChanges();
     }, 15000);
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
   }
   search() {
     this.router.navigate(['/hotels'], {

@@ -29,3 +29,7 @@
         </ng-template>
     </div>
 </div>
+<div class="modal-backdrop" *ngIf="showBlur"></div>
+<div class="Loader" *ngIf="showBlur">
+  <app-loader></app-loader>
+</div>

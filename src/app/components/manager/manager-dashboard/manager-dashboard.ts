@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../../services/booking';
 import { Password } from '../../../services/password';
+import { Loader } from '../../loader/loader';
+import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-manager-dashboard',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,Loader],
   templateUrl: './manager-dashboard.html',
   styleUrl: './manager-dashboard.css',
 })
@@ -22,7 +24,7 @@ export class ManagerDashboard {
   roomError: string = "";
   rooms: any[] = [];
   showReceptionistModal = false;
-
+  showBlur: boolean = true
   receptionistEmail = '';
   receptionistPassword = '';
   receptionistConfirmPassword = '';
@@ -47,6 +49,7 @@ export class ManagerDashboard {
     this.bookingService.getAllRooms().subscribe({
       next: (response) => {
         this.rooms = response;
+        this.showBlur=false;
         this.cdr.detectChanges();
       },
       error: error => console.log(error)
@@ -61,6 +64,7 @@ export class ManagerDashboard {
       next: (response) => {
         console.log(response);
         this.bookedRooms = response;
+        this.showBlur=false;
         this.cdr.detectChanges();
       },
       error: error => console.log(error)
@@ -88,6 +92,7 @@ export class ManagerDashboard {
       this.cdr.detectChanges();
       return;
     }
+    this.showBlur=true;
     const Payload = { roomNumber: this.roomNumber, status: this.status, type: this.type, price: this.price };
     this.hotelService.addRoom([Payload]).subscribe({
       next: (response) => {
@@ -118,13 +123,16 @@ export class ManagerDashboard {
       this.authService.registerReceptionist(payload).subscribe({
         next: (response) => {
           console.log(response);
+          this.closeReceptionistModal();
+          this.cdr.detectChanges();
         },
         error: error => {
           console.log(error);
+          this.receptionistError=error.error.error;
           this.cdr.detectChanges();
         }
       })
-      this.closeReceptionistModal();
+      
     }
     else {
       this.receptionistError = validate;

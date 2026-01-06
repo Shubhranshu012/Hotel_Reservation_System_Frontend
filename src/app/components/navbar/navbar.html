@@ -7,6 +7,8 @@
         <li *ngIf="isAdmin()"><a routerLink="/admin/dashboard">Dashboard</a></li>
         <li *ngIf="isManager()"><a routerLink="/manager/dashboard">Dashboard</a></li>
         <li *ngIf="isReceptionist()"><a routerLink="/reception/dashboard">Dashboard</a></li>
+        <li *ngIf="isGuest()"><a routerLink="/user/dashboard">My Bookings</a></li>
+        <li *ngIf="isLoggedIn()"><a routerLink="/profile">Profile</a></li>
         <li *ngIf="isLoggedIn()"><button type="button" (click)="logout()">Logout</button></li>
     </ul>
 </nav>

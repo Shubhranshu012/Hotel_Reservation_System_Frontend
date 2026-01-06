@@ -1,5 +1,5 @@
 <div class="dashboard">
-  <h1>Your Bookings</h1>
+  <h1>My Bookings</h1>
 
   <div class="booking-card" *ngFor="let booking of bookings">
     <div class="booking-info">
@@ -45,4 +45,8 @@
       <button class="modify-btn1" (click)="closeCancel()">No</button>
     </div>
   </div>
+</div>
+<div class="modal-backdrop" *ngIf="showBlur"></div>
+<div class="Loader" *ngIf="showBlur">
+  <app-loader></app-loader>
 </div>
