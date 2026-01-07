@@ -192,3 +192,6 @@
     flex-direction: column;
     text-align: center;
 }
+label{
+  padding-right: 1.5vw;
+}

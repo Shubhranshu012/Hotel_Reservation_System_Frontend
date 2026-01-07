@@ -16,6 +16,40 @@ A modern frontend application for hotel management built with Angular. This appl
 - **Profile Management**: User profile updates and password management.
 - **Responsive Design**: Optimized for various devices with a clean, intuitive UI.
 
+## User Roles and Permissions
+
+### Administrator
+- **View and Manage Hotels**: Add new hotels with details like name, city, address, and room count. View a list of all hotels including their status.
+- **Assign Managers**: Add managers to specific hotels by providing their email and password.
+- **Delete Hotels**: Remove hotels from the system (except inactive ones).
+
+### Manager
+- **Room Management**: Add new rooms specifying room number, type (Single, Double, Deluxe, Suite), status (Available, Occupied, Maintenance), and price.
+- **View Rooms**: Access a table of all rooms with their details.
+- **Assign Receptionists**: Register new receptionists for the hotel.
+- **Monitor Bookings**: View booked rooms with guest details, check-in/out dates, and status.
+- **Booking Analytics**: Review month-wise and year-wise booking summaries including total bookings and revenue.
+
+### Receptionist
+- **Search Availability**: Find available rooms based on check-in and check-out dates.
+- **Book Rooms**: Reserve rooms for guests by entering customer email and name, calculating total price.
+- **View All Rooms**: See the status of all rooms in the hotel.
+- **Manage Bookings**: View booked rooms and perform check-in and check-out operations.
+
+### Guest (User)
+- **View Bookings**: See a list of their bookings including room details, dates, price, and status.
+- **Modify Bookings**: Change check-in and check-out dates for existing bookings.
+- **Cancel Bookings**: Cancel bookings that are in 'BOOKED' status.
+
+## Screenshots
+
+![Home](Pics_Frontend/Home.png)
+![Login](Pics_Frontend/Login.png)
+![Register](Pics_Frontend/Register.png)
+![Admin Dashboard](Pics_Frontend/Admin%20Dashboard.png)
+![Manager Dashboard](Pics_Frontend/Manager%20Dashboard.png)
+![Reception Dashboard](Pics_Frontend/Reception%20Dashboard.png)
+
 ## Prerequisites
 
 Before running this project, ensure you have the following installed:

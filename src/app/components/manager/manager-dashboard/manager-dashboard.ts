@@ -82,15 +82,11 @@ export class ManagerDashboard {
       const date = new Date(booking.checkInDate);
       const monthKey = date.toLocaleString('default', { month: 'long', year: 'numeric' });
       const yearKey = date.getFullYear();
-
-      // Month-wise
       if (!monthMap[monthKey]) {
         monthMap[monthKey] = { month: monthKey, bookings: 0, revenue: 0 };
       }
       monthMap[monthKey].bookings += 1;
       monthMap[monthKey].revenue += booking.price || 0;
-
-      // Year-wise
       if (!yearMap[yearKey]) {
         yearMap[yearKey] = { year: yearKey, bookings: 0, revenue: 0 };
       }
@@ -147,6 +143,7 @@ export class ManagerDashboard {
       this.cdr.detectChanges();
       return;
     }
+    this.showBlur=true;
     const validate = this.passwordService.validate(this.receptionistPassword);
     if (validate == null) {
       const payload = { email: this.receptionistEmail, password: this.receptionistPassword,confirmPassword:this.receptionistConfirmPassword };
@@ -163,7 +160,7 @@ export class ManagerDashboard {
           this.cdr.detectChanges();
         }
       })
-      
+      this.showBlur=false;
     }
     else {
       this.receptionistError = validate;
