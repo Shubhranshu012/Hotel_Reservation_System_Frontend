@@ -53,8 +53,9 @@ export class Signin {
             }, 2000);
           },
           error:(error) => {
+            console.log(error);
             this.showBlur=false;
-            this.message=error.error.error;
+            this.message=error.error.error||error.error.registerRequest;
             this.cdr.detectChanges();
           } 
         });

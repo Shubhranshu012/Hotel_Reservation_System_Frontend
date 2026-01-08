@@ -76,19 +76,26 @@
   font-size: 32px;
 }
 
-.footer {
-  background-color: #222;
-  color: #ccc;
-  text-align: center;
-  padding: 20px;
-}
 .booking-form {
   display: flex;
   gap: 15px;
   background: rgba(255, 255, 255, 0.95);
   padding: 15px;
-  border-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   margin-top: 30px;
+  outline: none;
+  border: none;
+}
+.Error{
+  color: red;
+  font-weight: bold;
+  width: 100%;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.95);
+  height: 5vh;
+  font-size: 14px;
 }
 
 .booking-form input,.booking-form select {

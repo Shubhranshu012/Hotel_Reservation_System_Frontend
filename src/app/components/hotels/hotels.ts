@@ -38,6 +38,7 @@ export class Hotels {
         },
         error: error => {
           console.log(error);
+          this.showBlur=false;
           this.cdr.detectChanges();
         }
       });

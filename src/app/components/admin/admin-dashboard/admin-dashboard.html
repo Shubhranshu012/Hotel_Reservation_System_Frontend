@@ -17,13 +17,11 @@
                 <label>Address</label>
                 <input type="text" [(ngModel)]="address" name="address">
             </div>
-            <div class="form-field">
-                <label>Room Count</label>
-                <input type="number" [(ngModel)]="roomCount" name="roomCount">
-            </div>
+            
         </div>
         <div class="error">
-            <p *ngIf="hotelError" class="Error-text">{{hotelError}}</p>
+            <p class="Error-text">{{hotelError}}</p>
+            <p class="succesManager">{{successHotel}}</p>
         </div>
         <button type="submit" class="submit-btn"> Add Hotel </button>
     </form>
@@ -60,6 +58,7 @@
   <input type="password" placeholder="Confirm Password" [(ngModel)]="managerConfirmPassword" />
   <div class="Message">
     <p>{{managerError}}</p>
+    <p class="succesManager">{{successMessage}}</p>
   </div>
   <div class="modal-actions">
     <button class="primary" (click)="addManager()">Add</button>

@@ -6,8 +6,8 @@
   <div class="hero-content">
     <h1>Experience Luxury & Comfort</h1>
     <p>Premium hotel management for unforgettable stays</p>
-
-    <form class="booking-form" (ngSubmit)="search()">
+    <div>
+      <form class="booking-form" (ngSubmit)="search()">
       <input type="text" placeholder="City" name="city" [(ngModel)]="city">
       <input type="date" [min]="minDate" name="checkIn" [(ngModel)]="checkIn">
       <input type="date" [min]="checkIn || minDate" name="checkOut" [(ngModel)]="checkOut">
@@ -19,5 +19,8 @@
       </select>
       <button type="submit">Search</button>
     </form>
+    </div>
+    <p class="Error">{{error}}</p>
+
   </div>
 </header>

@@ -53,11 +53,6 @@ export class Profile implements OnInit{
       this.cdr.detectChanges();
       return;
     }
-    if(this.oldPassword !== this.newPassword){
-      this.errorMessage="Passwords Not same";
-      this.cdr.detectChanges();
-      return;
-    }
     const message =this.passwordService.validate(this.newPassword);
     if(message==null){
       this.showBlur=true;
@@ -74,7 +69,7 @@ export class Profile implements OnInit{
         },
         error:(error)=>{
           this.showBlur=false;
-          this.errorMessage="Something Went Wrong";
+          this.errorMessage="Old Password Wrong";
           this.cdr.detectChanges();
         }
       })

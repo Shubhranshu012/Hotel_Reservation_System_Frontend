@@ -17,7 +17,7 @@
                     <div class="hotel-info">
                         <h2>{{ hotel.hotelName }}</h2>
                         <p>{{ hotel.address }}, {{ hotel.city }}</p>
-                        <p>Rooms: {{ hotel.numberOfRooms }} | Status: {{ hotel.status }}</p>
+                        <p>Rooms: {{ hotel.numberOfRooms }}</p>
                         <button class="book-btn" [disabled]="hotel.status !== 'ACTIVE'" (click)="rooms(hotel.id)">Book Now</button>
                     </div>
                 </div>

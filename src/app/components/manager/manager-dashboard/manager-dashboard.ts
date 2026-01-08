@@ -29,6 +29,8 @@ export class ManagerDashboard {
   receptionistPassword = '';
   receptionistConfirmPassword = '';
   receptionistError = '';
+  roomSuccess:string="";
+  successRecp:string="";
   bookedRooms: any[] = [];
 
   monthlySummary: any[] = [];
@@ -104,6 +106,7 @@ export class ManagerDashboard {
       this.cdr.detectChanges();
       return;
     }
+    this.roomNumber=this.roomNumber.trim();
     if (this.status == "") {
       this.roomError = 'Status is required';
       this.cdr.detectChanges();
@@ -124,13 +127,18 @@ export class ManagerDashboard {
     this.hotelService.addRoom([Payload]).subscribe({
       next: (response) => {
         console.log(response);
+        this.roomSuccess="Room Added";
+        this.cdr.detectChanges();
         this.allRooms();
       },
       error: error => {
         console.log(error);
+        this.roomError=error.error.error;
+        this.showBlur=false;
         this.cdr.detectChanges();
       }
     });
+    this.cdr.detectChanges();
   }
   registerReceptionist() {
     this.receptionistError = '';
@@ -151,8 +159,12 @@ export class ManagerDashboard {
       this.authService.registerReceptionist(payload).subscribe({
         next: (response) => {
           console.log(response);
-          this.closeReceptionistModal();
+          this.successRecp="Receptionist Added";
           this.cdr.detectChanges();
+          setTimeout(() => {
+              this.closeReceptionistModal();
+              this.cdr.detectChanges();
+          }, 2000);
         },
         error: error => {
           console.log(error);
@@ -161,6 +173,7 @@ export class ManagerDashboard {
         }
       })
       this.showBlur=false;
+  
     }
     else {
       this.receptionistError = validate;

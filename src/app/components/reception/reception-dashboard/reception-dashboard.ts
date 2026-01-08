@@ -17,7 +17,7 @@ export class ReceptionDashboard {
   checkOutDate = '';
   rooms: any[] = [];
   bookingRooms: any[] = [];
-  submitError="";
+  submitError = "";
   showModal = false;
   selectedRoom: any = null;
   customerEmail = '';
@@ -78,9 +78,9 @@ export class ReceptionDashboard {
   }
 
   submitSearch() {
-    this.submitError="";
+    this.submitError = "";
     if (!this.checkInDate || !this.checkOutDate) {
-      this.submitError='Check-in and Check-out dates are required';
+      this.submitError = 'Check-in and Check-out dates are required';
       this.cdr.detectChanges();
       return;
     }
@@ -107,17 +107,26 @@ export class ReceptionDashboard {
     this.selectedRoom = null;
     document.body.style.overflow = 'auto';
   }
-  checkIn(roomId: string, bookingId: string) {
+  checkIn(roomId: string, bookingId: string, checkInDate: string) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const checkIn = new Date(checkInDate);
+    checkIn.setHours(0, 0, 0, 0);
+
+    if (checkIn > today) {
+      console.log('Check-in date is in the future');
+      return; 
+    }
     const payload = { checkIn: true };
     this.hotelService.checkInCheckOut(payload, roomId, bookingId).subscribe({
       next: (response) => {
         console.log(response);
         this.loadRooms();
+        this.loadBookings();
         this.cdr.detectChanges();
       },
       error: error => console.log(error)
     });
-    console.log(roomId);
   }
   checkOut(roomId: string, bookingId: string) {
     const payload = { checkIn: false };
@@ -125,6 +134,7 @@ export class ReceptionDashboard {
       next: (response) => {
         console.log(response);
         this.loadRooms();
+        this.loadBookings();
         this.cdr.detectChanges();
       },
       error: error => console.log(error)
@@ -151,7 +161,7 @@ export class ReceptionDashboard {
     this.bookingService.bookHotel(payload, hotelId).subscribe({
       next: (response) => {
         console.log(response);
-        this.bookingRooms=[];
+        this.bookingRooms = [];
         this.loadBookings();
         this.cdr.detectChanges();
       },

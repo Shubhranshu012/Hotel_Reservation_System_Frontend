@@ -24,6 +24,7 @@ export class UserDashboard {
   showBlur: boolean = true;
   minDate: string = '';
   errorMessage:string ="";
+  errorCancel:string ="";
   constructor(private bookingService: BookingService,private cdr: ChangeDetectorRef) {}
   getAllBookings(){
     this.bookingService.getUserHotel().subscribe({
@@ -68,15 +69,18 @@ export class UserDashboard {
       next: (res) => {
         this.showBlur=false;
         this.getAllBookings();
+        this.closeModify();
         this.cdr.detectChanges();
+        
       },
       error: (error) => {
         this.showBlur=false;
         this.errorMessage=error.error.changeRequest || error.error.error;
+        this.cdr.detectChanges();
         console.log(error);
       }
     })
-    this.closeModify();
+    
   }
   openCancel(booking: any) {
     this.selectedBooking = booking;
@@ -93,10 +97,15 @@ export class UserDashboard {
     console.log('Cancel booking:', this.selectedBooking);
     this.bookingService.cancelUserHotel(this.selectedBooking.id).subscribe({
       next: (res) => {
-        this.getAllBookings();;
+        this.getAllBookings();
+        this.closeCancel();
       },
-      error: err => console.log(err)
+      error: error => {
+        console.log(error);
+        this.errorCancel=error.error.error;
+        this.cdr.detectChanges();
+      }
     })
-    this.closeCancel();
+    
   }
 }

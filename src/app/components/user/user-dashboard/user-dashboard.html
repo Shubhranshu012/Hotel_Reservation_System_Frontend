@@ -3,8 +3,7 @@
 
   <div class="booking-card" *ngFor="let booking of bookings">
     <div class="booking-info">
-      <h3>Room ID: {{ booking.roomId }}</h3>
-      <p><strong>Guest:</strong> {{ booking.guestName }}</p>
+      <h3>Hotel Name ID: {{ booking.hotelName }}</h3>
       <p><strong>Check-In:</strong> {{ booking.checkInDate }}</p>
       <p><strong>Check-Out:</strong> {{ booking.checkOutDate }}</p>
       <p><strong>Price:</strong>₹ {{ booking.price }}</p>
@@ -41,11 +40,14 @@
   <div class="modal">
     <h2>Cancel Booking?</h2>
     <p>Are you sure you want to cancel this booking?</p>
-
+    <div class="message">
+      <p>{{errorCancel}}</p>
+    </div>
     <div class="modal-actions">
       <button class="cancel-btn1" (click)="confirmCancel()">Yes</button>
       <button class="modify-btn1" (click)="closeCancel()">No</button>
     </div>
+
   </div>
 </div>
 <div class="modal-backdrop" *ngIf="showBlur"></div>

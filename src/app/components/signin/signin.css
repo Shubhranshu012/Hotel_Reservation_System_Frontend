@@ -1,6 +1,7 @@
 .login-container {
-    width: 99vw;
-    height: 85vh;
+    width: 98vw;
+    height: 80vh;
+    margin-bottom: 10vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +11,7 @@
 .soft-card {
     background: rgba(235, 228, 228, 0.9);
     border-radius: 28px;
-    padding: 40px;
+    padding: 20px;
     max-width: 400px;
     width: 100%;
     margin: auto;
@@ -44,7 +45,7 @@
 
 .soft-field input {
     width: 100%;
-    padding: 18px 16px;
+    padding: 10px 10px;
     border: none;
     background: transparent;
     outline: none;

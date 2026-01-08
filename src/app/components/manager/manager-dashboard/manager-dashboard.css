@@ -61,7 +61,12 @@
 .error-text {
   color: #dc2626;
   font-size: 14px;
+  font-weight: bold;
   margin-top: 10px;
+}
+.success{
+  color: #166534;
+  font-weight: bold;
 }
 
 .rooms-table {
@@ -194,4 +199,8 @@
 }
 label{
   padding-right: 1.5vw;
+}
+.succesMessage{
+  font-weight: bold;
+  color: green;
 }

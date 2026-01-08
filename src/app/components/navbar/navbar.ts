@@ -46,6 +46,13 @@ export class Navbar {
     else{
       return false;
     }
-
+  }
+  isGuestorNot(){
+    if(localStorage.getItem('role') === 'GUEST' || localStorage.getItem('token')===null){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }

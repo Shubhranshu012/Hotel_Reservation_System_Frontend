@@ -31,7 +31,8 @@ export class AdminDashboard {
   managerConfirmPassword = '';
   managerError = '';
   showBlur: boolean = true;
-
+  successMessage:string=""
+  successHotel:string="";
   constructor(private passwordService: Password, private router: Router, private hotelService: HotelService, private cdr: ChangeDetectorRef, private authService: Auth) { }
 
   ngOnInit(): void {
@@ -91,8 +92,15 @@ export class AdminDashboard {
       const payload = { hotelId: this.selectedHotelId, email: this.managerEmail, password: this.managerPassword, confirmPassword: this.managerConfirmPassword };
       this.authService.registerManager(payload, this.selectedHotelId).subscribe({
         next: () => {
-          this.loadHotels();
+          this.showBlur=false;
+          this.managerError="";
+          this.successMessage = "Manager Added successful!";
+          this.cdr.detectChanges();
           this.closeModals();
+          setTimeout(() => {
+              this.closeModals();
+              this.cdr.detectChanges();
+          }, 2000);
         },
         error: (error) => {
           console.error(error);
@@ -133,7 +141,7 @@ export class AdminDashboard {
       this.hotelError = 'Hotel Name is required';
       return;
     }
-
+    this.hotelName=this.hotelName.trim();
     if (this.city.trim().length === 0) {
       this.hotelError = 'City is required';
       return;
@@ -144,7 +152,7 @@ export class AdminDashboard {
       return;
     }
 
-    if (this.roomCount <= 0) {
+    if (this.roomCount < 0) {
       this.hotelError = 'Room Count must be greater than 0';
       return;
     }
@@ -153,6 +161,8 @@ export class AdminDashboard {
     this.hotelService.addHotel(payload).subscribe({
       next: () => {
         console.log("Added Hotel");
+        this.successHotel="Hotel Added";
+        this.cdr.detectChanges();
         this.loadHotels();
       },
       error: (error) => {

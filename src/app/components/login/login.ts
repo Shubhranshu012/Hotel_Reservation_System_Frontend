@@ -50,14 +50,15 @@ export class Login {
         },
         error: error => {
           this.showBlur=false;
-          console.log(error);
-          if (error.status === 403) {
-            this.errorMessage = 'Wrong UserName or Password';
-          } else {
-            this.errorMessage = 'Login failed. Please try again.';
+          if(error.status==404){
+            this.errorMessage="Wrong Email Or Password";
+          }
+          else{
+            this.errorMessage = error.error.loginRequest || "Wrong Email Or Password";
           }
           this.cdr.detectChanges();
         }
       });
+      this.cdr.detectChanges();
   }
 }

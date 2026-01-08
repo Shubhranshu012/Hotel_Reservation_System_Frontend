@@ -43,7 +43,8 @@
         </div>
       </div>
 
-      <p *ngIf="roomError" class="error-text">{{ roomError }}</p>
+      <p class="error-text">{{ roomError }}</p>
+      <p class="succesMessage">{{roomSuccess}}</p>
 
       <button type="submit" class="submit-btn">Add Room</button>
     </form>
@@ -75,7 +76,7 @@
     </table>
   </div>
   <div class="card" *ngIf="bookedRooms.length > 0">
-    <h2 class="card-title">Booked Rooms</h2>
+    <h2 class="card-title">Bookings</h2>
     <table class="rooms-table">
       <thead>
         <tr>
@@ -163,9 +164,8 @@
     <input type="password" [(ngModel)]="receptionistConfirmPassword" placeholder="********" />
   </div>
 
-  <p *ngIf="receptionistError" class="modal-error">
-    {{ receptionistError }}
-  </p>
+  <p class="modal-error">{{ receptionistError }}</p>
+  <p class="success">{{successRecp}}</p>
 
   <div class="modal-actions">
     <button class="cancel-btn" (click)="closeReceptionistModal()">Cancel</button>
